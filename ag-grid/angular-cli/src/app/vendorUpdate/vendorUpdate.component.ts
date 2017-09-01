@@ -141,7 +141,8 @@ export class VendorUpdateComponent implements OnInit{
 
     this.vendorService.postData(this.vendordata).subscribe(result =>{
         console.log(result);
-        this.router.navigate(['grid']);
+        this.myGrid.updateRowData();
+        //this.router.navigate(['']);
       },
       error =>{
         alert('This is a problem with the enrollment');

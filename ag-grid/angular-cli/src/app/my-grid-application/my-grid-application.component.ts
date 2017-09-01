@@ -1,4 +1,5 @@
 import {Component,OnInit} from "@angular/core";
+import {Router} from '@angular/router';
 import {RedComponentComponent} from "../red-component/red-component.component";
 
 import {GridOptions} from "ag-grid/main";
@@ -14,13 +15,15 @@ export class MyGridApplicationComponent  {
     columnDefs: any[]
     rowData: any [];
     vendors:any;
-    uflag:boolean;   
+    uflag:boolean;
+    aflag:boolean;   
     vendorDetails:any[] 
     
 
-    constructor(private appService:AppService) {
+    constructor(private appService:AppService,private router:Router) {
+        console.log("in Grid ");
         this.gridOptions = <GridOptions>{};
-
+        this.aflag=true;
         this.columnDefs = [
             {headerName: "VendorId", field: "vendor_id"},
             {headerName: "Vendor Company", field: "vendorCompanyName", cellRendererFramework: RedComponentComponent},
@@ -37,7 +40,7 @@ export class MyGridApplicationComponent  {
         this.appService.getAll().subscribe(vendors =>{
                 //this.rowData= JSON.stringify(vendors);
                 localStorage.setItem('vendordetails',JSON.stringify(vendors));
-               this.rowData= JSON.parse(localStorage.getItem('vendordetails'));
+                    this.rowData= JSON.parse(localStorage.getItem('vendordetails'));
                console.log(this.rowData);
                
         })
@@ -48,13 +51,28 @@ export class MyGridApplicationComponent  {
         // ]
     }
 
+    vendorUpdate(){
+            this.router.navigate(['update']);
+    }
 setRowData(vendors){
     console.log("In grid Setter")
     this.vendorDetails=vendors;
 }
 getRowData(){
-    console.log("In grid getter")
+    console.log("In grid getter");
     return this.vendorDetails;
+}
+
+updateRowData(){
+    this.appService.getAll().subscribe(vendors =>{
+        //this.rowData= JSON.stringify(vendors);
+        localStorage.setItem('updatedVendordetails',JSON.stringify(vendors));
+         this.rowData= JSON.parse(localStorage.getItem('updatedVendordetails'));
+         this.uflag=false;
+       console.log(this.rowData);
+       
+})
+
 }
     private onRowClicked($event) {
         console.log('onRowClicked: ' + $event.node.data.vendor_id);

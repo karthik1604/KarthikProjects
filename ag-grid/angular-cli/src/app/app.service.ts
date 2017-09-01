@@ -19,6 +19,13 @@ export class AppService{
         return this.http.get('http://localhost:9090/vendor/getVendor?vendor_id='+vendor_id)
         .map(res => res.json());
     }
-
+    deleteById(vendor_id){
+        return this.http.get('http://localhost:9090/vendor/deleteVendor?vendor_id='+vendor_id)
+        .map(res => res|| {result :'record deleted successfully'});
+    }
+    getApp(username,password){
+        return this.http.get('http://localhost:9090/patient/login?username='+username+'&password='+password)
+        .map(res => res.json());
+            }
 
 }

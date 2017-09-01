@@ -24,5 +24,30 @@
                 <a class="nav-link" href="https://github.com/beeman"><i class="fa fa-github" aria-hidden="true"></i></a>
               </li>
             </ul>
+            <ul class="nav navbar-nav navbar-right" *ngIf = "!signUpVisibilityFlag">
+           <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" style = "color:white;" >{{patientInfo?.firstname}} <span class="caret"></span></a>
+             <ul class="dropdown-menu">
+             <li class = "active"><a routerLink="/" style="color: white;" routerLinkActive="active" (click)="logout()">Logout</a></li>
+             <li class = "active"><a routerLink="/profile" style="color: white;" routerLinkActive="active">Edit your Profile</a></li>
+             </ul>
+           </li>
+        </ul>
+        
+          <ul class="nav navbar-nav navbar-right" *ngIf = "!signUpVisibilityFlag">
+
+              <li class="dropdown" dropdown> <!-- {1} -->
+                  <a role="button" > <!-- {2} -->
+                    {{patientInfo?.firstname}} <span class="caret"></span></a>
+                  <ul *dropdownMenu class="dropdown-menu"> <!-- {3} -->
+                    <li><a routerLink="/" style="color: black;" routerLinkActive="active" (click)="logout()">Logout</a></li>
+                    <li><a routerLink="/profile" style="color: black;" routerLinkActive="active">Edit your Profile</a></li>
+                  </ul>
+              </li>
+          </ul>
+  
+        
+            <div class="pull-right" *ngIf = "signUpVisibilityFlag" >
+                <a class = "navbar-brand"  routerLink="/login" routerLinkActive="active" style="color: white;">Sign In</a>
+              </div>
           </nav>
            <router-outlet></router-outlet>  
