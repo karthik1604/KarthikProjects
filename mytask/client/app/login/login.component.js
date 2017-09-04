@@ -12,11 +12,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var app_service_1 = require("./../app.service");
 var router_1 = require("@angular/router");
+var forms_1 = require("@angular/forms");
+//import { REACTIVE_FORM_DIRECTIVES } from "@angular/forms";
 var LoginComponent = (function () {
-    function LoginComponent(appService, router) {
+    //username: String
+    //password: String
+    function LoginComponent(appService, router, formbuilder) {
         this.appService = appService;
         this.router = router;
+        this.formbuilder = formbuilder;
     }
+    LoginComponent.prototype.ngOnInit = function () {
+        this.form = this.formbuilder.group({
+            username: ['', [forms_1.Validators.required]],
+            password: ['', [forms_1.Validators.required]],
+        });
+    };
     LoginComponent.prototype.onSubmit = function (f) {
         var _this = this;
         console.log('Username:', f.value.username);
@@ -34,9 +45,9 @@ var LoginComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'log',
-            templateUrl: 'login.component.html'
+            templateUrl: 'login.component.html',
         }),
-        __metadata("design:paramtypes", [app_service_1.AppService, router_1.Router])
+        __metadata("design:paramtypes", [app_service_1.AppService, router_1.Router, forms_1.FormBuilder])
     ], LoginComponent);
     return LoginComponent;
 }());

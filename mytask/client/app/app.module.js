@@ -19,12 +19,13 @@ var home_component_1 = require("./home/home.component");
 var user_component_1 = require("./user/user.component");
 //import {FormService} from "./register/register.service";
 var register_component_1 = require("./register/register.component");
+var forms_2 = require("@angular/forms");
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, http_1.HttpModule, forms_1.FormsModule, app_routing_1.AppRoutingModule],
+            imports: [platform_browser_1.BrowserModule, http_1.HttpModule, forms_1.FormsModule, app_routing_1.AppRoutingModule, forms_2.ReactiveFormsModule],
             declarations: [app_component_1.AppComponent, login_component_1.LoginComponent, home_component_1.HomeComponent, user_component_1.UserComponent, register_component_1.RegisterComponent],
             providers: [
                 { provide: common_1.APP_BASE_HREF, useValue: '/' }

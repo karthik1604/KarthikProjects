@@ -1,49 +1,82 @@
-<div>
-  <form class="cotainer-fluid" #f ="ngForm" (ngSubmit)="onSubmit(f)">
-  <p> Enter Your Personal Information</p>
-  <table>
-    <tr>
+
+<div class ="container">
+    <div class="row">
+        <div class="span12">
+
+          <div class="jumbotron">
+            <p > Enter Your Personal Information</p>
+          </div>
+          <form class="container-fluid"  [formGroup]="form" (ngSubmit)="onSubmit(form)">          
+          <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id ="username" placeholder="Username" formControlName= "username" name="username" [ngModel]="mymodel" (keydown.Tab)="onKey($event)" (focusout)="focusOutFunction($event)"/>
+                <div  *ngIf ="form.get('username').hasError('required') && (form.get('username').dirty || form.get('username').touched)"  class="alert alert-danger">
+                            username is required   
+                </div>
+                <div  *ngIf ="form.get('username').hasError('userNotUnique') && (form.get('username').dirty || form.get('username').touched)"  class="alert alert-danger">
+                            username is not unique 
+                </div>
+                <div  *ngIf = "uflag"class="alert alert-danger">
+                            username is not unique 
+                </div>
+          </div>
+          <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id ="password" placeholder="Password" formControlName="password" name="password"/>
+                <div  *ngIf ="form.get('password').hasError('required') && (form.get('password').dirty || form.get('password').touched)"  class="alert alert-danger">
+                            password is required   
+                </div>
+          </div>
+          <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email" placeholder="Email" formControlName="email" name="email" (focusout)="EmailfocusOutFunction($event)" />
+                <div  *ngIf ="(form.get('email').dirty || form.get('email').touched) && form.get('email').hasError('invalidEmailAddress') && !form.get('email').hasError('required')"  class="alert alert-danger">
+                            email must be of the pattern xxxx@xxx.com
+                </div>
+                 <div *ngIf="form.get('email').hasError('required') && (form.get('email').dirty || form.get('email').touched) " class="alert alert-danger">
+                                    email is required
+                                 </div>  
+                                 <div  *ngIf = "eflag"      class="alert alert-danger">
+                            email is already taken 
+                </div>
+                   <!--<div  *ngIf ="form.get('email').hasError('emailNotUnique') && (form.get('email').dirty || form.get('email').touched)"  class="alert alert-danger">
+                            email already taken
+                </div>-->
+                </div>
+               
+          
+          <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" id="phone" placeholder="Phone" formControlName="phone" name="phone"/>
+                <div  *ngIf ="!form.get('phone').hasError('required') && (form.get('phone').dirty || form.get('phone').touched) && form.get('phone').hasError('invalidNumberField') "  class="alert alert-danger">
+                            Phone number must be only in numbers
+                </div>
+                 <div *ngIf="form.get('phone').hasError('required') && (form.get('phone').dirty || form.get('phone').touched) " class="alert alert-danger">
+                                    phone number is required
+                  </div> 
+                  <div *ngIf="!form.get('phone').hasError('required') && (form.get('phone').dirty || form.get('phone').touched) && form.get('phone').hasError('minlength')" class="alert alert-danger">
+                                    phone number must be 10 digits
+                  </div>
+                  <div *ngIf="!form.get('phone').hasError('required') && (form.get('phone').dirty || form.get('phone').touched) && form.get('phone').hasError('maxlength')" class="alert alert-danger">
+                                    phone number must not be more than 10 digits
+                  </div>
+                </div>
+
+          
+          <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city" placeholder="City" formControlName="city" name="city"/>
+                <div  *ngIf ="form.get('city').hasError('required') && (form.get('city').dirty || form.get('city').touched)"  class="alert alert-danger">
+                            username is required   
+                </div>
+          </div>
+           <button [disabled]="form.invalid" class="btn btn-default">Submit</button>
   
-    <td>Username:</td>
-    <td><input type="text" class="form-group" id="username" ngModel #data.username="ngModel" name="data.username" required></td>
   
-    </tr>
-    <tr>
   
-    <td>Password:</td>
-    <td><input type="text" class="form-group" id="password" ngModel #data.password="ngModel" name="data.password" required></td>
- 
-    </tr>
-    
-   
-   <tr>
-    <td>Email: </td>
-   <td> <input type="text" class="form-group" id="email" ngModel #data.email="ngModel" name="data.email" required></td>
- 
-    </tr>
-
-    <tr>
-    <td>Phone: </td>
-   <td> <input type="text" class="form-group" id="phone" ngModel  #data.phone="ngModel" name="data.phone" required></td>
- 
-    </tr>
-
-    <tr>
-    <td>City : </td>
-   <td> <input type="text" class="form-group" id="city" ngModel #data.city="ngModel" name="data.city" required></td>
- 
-    </tr>
-
-   
-
-
-
-   
-  </table>
-
-
-  
-  <button  type="submit" class="btn btn-default">Submit</button>
 </form>
+        </div>
+    </div>
 </div>
+
 

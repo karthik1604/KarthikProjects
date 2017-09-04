@@ -21,6 +21,18 @@ var AppService = (function () {
         return this.http.get('http://localhost:8080/user/login?username=' + username + '&password=' + password)
             .map(function (res) { return res.json(); });
     };
+    AppService.prototype.findAll = function () {
+        return this.http.get('http://localhost:8080/user/findAll')
+            .map(function (res) { return res.json(); });
+    };
+    AppService.prototype.validUser = function (username) {
+        return this.http.get('http://localhost:8080/user/validUser?username=' + username)
+            .map(function (res) { return res.json(); });
+    };
+    AppService.prototype.validEmail = function (email) {
+        return this.http.get('http://localhost:8080/user/validEmail?email=' + email)
+            .map(function (res) { return res.json(); });
+    };
     AppService = __decorate([
         core_1.Injectable(),
         __metadata("design:paramtypes", [http_1.Http])

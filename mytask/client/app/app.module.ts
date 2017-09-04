@@ -13,9 +13,11 @@ import {HomeComponent} from "./home/home.component";
 import {UserComponent} from "./user/user.component";
 //import {FormService} from "./register/register.service";
 import {RegisterComponent} from "./register/register.component";
+import{ReactiveFormsModule} from "@angular/forms";
+import{NgGridModule} from "angular2-grid"
 
 @NgModule({
-  imports: [ BrowserModule,HttpModule,FormsModule,AppRoutingModule],
+  imports: [ BrowserModule,HttpModule,FormsModule,AppRoutingModule,ReactiveFormsModule],
   declarations: [AppComponent,LoginComponent,HomeComponent,UserComponent,RegisterComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' }
